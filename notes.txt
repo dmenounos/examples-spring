@@ -1,0 +1,33 @@
+
+Controller package
+==================
+
+Input data
+----------
+For inputs to the controller we want to map to standard java types as much as 
+possible.
+
+Query parameters need to be declared collectivelly to both the method mapping 
+and also at each parameter mapping individually.
+
+Output data
+-----------
+For outputs of the controller we could use standard types. However it is very 
+common to require controll of the http response and the best way is to use a 
+ResponseEntity. So in order to have a uniform interface we always return 
+ResponseEntity, instead of a mixed approach.
+
+Exception Handlng
+-----------------
+The modern approach use runtime exceptions, while older use checked exceptions. 
+Almost all new APIs at least since Java 5 time and all languages, besides java, 
+use runtime exceptions. Practically checked exceptions are a failed experiment.
+
+So we will convert from checked to runtime exception and rethrow, instead of 
+rethrow checked exception and propagating and polluting the calling code.
+
+It is also good to handle the exception handling at the outermost boundary 
+level of a method so that we have one try-catch block wrapping all code 
+instead of many scattered and nested blocks.
+
+This approach also makes the compiler happier.
